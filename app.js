@@ -13,7 +13,7 @@ main()
     console.log('Database connection successful')
     console.log(connect)
   })
-  .catch((err) => console.log(err), process.exit())
+  .catch((err) => console.log(err))
 async function main() {
   await mongoose.connect(process.env.MONGO_URL)
 }
