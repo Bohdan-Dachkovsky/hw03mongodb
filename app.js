@@ -7,13 +7,13 @@ const cors = require('cors')
 const router = require('./routers/mainRouter.js')
 const logger = require('morgan')
 if ((process.env.NODE_ENV = 'development')) app.use(logger('dev'))
-
+const User = require('./model/userModal.js')
 main()
   .then((connect) => {
-    console.log('Connect was sucsess')
+    console.log('Database connection successful')
     console.log(connect)
   })
-  .catch((err) => console.log(err))
+  .catch((err) => console.log(err), process.exit())
 async function main() {
   await mongoose.connect(process.env.MONGO_URL)
 }
