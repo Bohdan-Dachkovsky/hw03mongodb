@@ -1,11 +1,22 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 require('dotenv').config({ path: './.env' })
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const router = require('./routers/mainRouter.js')
 const logger = require('morgan')
 if ((process.env.NODE_ENV = 'development')) app.use(logger('dev'))
+
+main()
+  .then((connect) => {
+    console.log('Connect was sucsess')
+    console.log(connect)
+  })
+  .catch((err) => console.log(err))
+async function main() {
+  await mongoose.connect(process.env.MONGO_URL)
+}
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

@@ -16,9 +16,7 @@ router.use('/app/contacts/:id', async (req, res, next) => {
     const { error, value } = handleIndeIndentificatorVal(req.params)
     const { id } = value
     if (error) return new IdError(403, error.details[0].message)
-    const listContacts = JSON.parse(
-      await fs.readFile('./data/listOfContacts.json'),
-    )
+    const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
     const contactGrouped = listContacts.find((element) => element.id === id)
     if (!contactGrouped) return res.status(404).json({ message: 'Not found' })
     req.contactGrouped = contactGrouped
@@ -32,9 +30,7 @@ router.use('/app/contacts/:id', async (req, res, next) => {
   try {
     const { error, value } = handleIndeIndentificatorVal(req.params)
     const { id } = value
-    const listContacts = JSON.parse(
-      await fs.readFile('./data/listOfContacts.json'),
-    )
+    const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
 
     if (error) return new IdError(403, error.details[0].message)
     const contactsGrouped = listContacts.find((element) => element.id !== id)
@@ -52,9 +48,7 @@ router.post('/app/contacts', async (req, res) => {
     console.log(error, value)
     const { name, email, phone, id } = value
     if (error) return new IdError(403, error.details[0].message)
-    const userNumbers = JSON.parse(
-      await fs.readFile('./data/listOfContacts.json'),
-    )
+    const userNumbers = JSON.parse(await fs.readFile('./db/contacts.json'))
     const addUser = {
       name,
       email,
@@ -62,10 +56,7 @@ router.post('/app/contacts', async (req, res) => {
       id: id,
     }
     userNumbers.push(addUser)
-    await fs.writeFile(
-      './data/listOfContacts.json',
-      JSON.stringify(userNumbers),
-    )
+    await fs.writeFile('./db/contacts.json', JSON.stringify(userNumbers))
     res.status(201).json({
       contact: addUser,
     })
@@ -76,9 +67,7 @@ router.post('/app/contacts', async (req, res) => {
 
 router.get('/app/contacts', async (req, res) => {
   try {
-    const listContacts = JSON.parse(
-      await fs.readFile('./data/listOfContacts.json'),
-    )
+    const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
 
     res.status(201).json({
       listContacts,
@@ -92,9 +81,7 @@ router.get('/app/contacts', async (req, res) => {
 router.get('/app/contacts/:id', async (req, res) => {
   try {
     const { id } = req.params
-    const listContacts = JSON.parse(
-      await fs.readFile('./data/listOfContacts.json'),
-    )
+    const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
     const contactGrouped = listContacts.filter((element) => element.id === id)
     res.json(contactGrouped)
   } catch (error) {
