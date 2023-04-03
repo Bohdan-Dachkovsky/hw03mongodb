@@ -1,4 +1,4 @@
-const fs = require('fs').promises
+// const fs = require('fs').promises
 const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
@@ -24,8 +24,8 @@ exports.createContactsList = catchAuthErr(async (req, res) => {
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
   try {
-    const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
-
+    // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
+    const listContacts = await User.find()
     res.status(201).json({
       listContacts,
     })
@@ -35,9 +35,9 @@ exports.searchContactsList = catchAuthErr(async (req, res) => {
 })
 exports.getContactById = catchAuthErr(async (req, res) => {
   try {
-    const { id } = req.params
-    const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
-    const contactGrouped = listContacts.filter((element) => element.id === id)
+    const { id } = req.body
+    // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
+    // const contactGrouped = listContacts.filter((element) => element.id === id)
     res.json(contactGrouped)
   } catch (error) {
     const err = new ErrorMessage()
@@ -46,7 +46,7 @@ exports.getContactById = catchAuthErr(async (req, res) => {
 })
 exports.updContactById = catchAuthErr(async (req, res) => {
   try {
-    const { contactGrouped } = req
+    const { contactGrouped } = req.body
     res.status(200).json({ contactGrouped })
   } catch (error) {
     const err = new ErrorMessage()
@@ -55,7 +55,7 @@ exports.updContactById = catchAuthErr(async (req, res) => {
 })
 exports.dltContactById = catchAuthErr(async (req, res) => {
   try {
-    const { contactsArr } = req
+    const { contactsArr } = req.body
     if (contactsArr) return res.status(200).json({ message: 'contact deleted' })
   } catch (error) {
     const err = new ErrorMessage()
