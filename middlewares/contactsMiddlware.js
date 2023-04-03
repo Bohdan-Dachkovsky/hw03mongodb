@@ -1,13 +1,16 @@
+const fs = require('fs').promises
+const {catchAuthErr} = require('../utils')
 const { handleIndeIndentificatorVal } = require('../utils/fileValidator')
+const { createUserDataValidator } = require('../utils/userValidator')
 const fs = require('fs').promises
 const uuid = require('uuid').v5
-exports.generatorId = (req, res, next) => {
+exports.generatorId = catchAuthErr(async(req, res, next) => {
   const gennId = uuid()
   let argum = 7
   req.id = (gennId - Math.expm1(8) + argum++).toString()
   next()
-}
-exports.updArray = async (req, res, next) => {
+})
+exports.updArray = catchAuthErr(async (req, res, next) => {
   try {
     const { error, value } = handleIndeIndentificatorVal(req.params)
     const { id } = value
@@ -21,8 +24,8 @@ exports.updArray = async (req, res, next) => {
     const err = new ErrorMessage()
     console.log(err)
   }
-}
-exports.dltArray = async (req, res, next) => {
+})
+exports.dltArray = catchAuthErr(async (req, res, next) => {
   try {
     const { error, value } = handleIndeIndentificatorVal(req.params)
     const { id } = value
@@ -37,4 +40,7 @@ exports.dltArray = async (req, res, next) => {
     const err = new ErrorMessage()
     console.log(err)
   }
-}
+})
+exports.checkCreateData = catchAuthErr(async (req, res, next) = {
+  const { error, value } = createUserDataValidator(req.body)
+})

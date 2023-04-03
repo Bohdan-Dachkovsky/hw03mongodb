@@ -12,11 +12,12 @@ const {
   generatorId,
   updArray,
   dltArray,
+  checkCreateData,
 } = require('../middlewares/contactsMiddlware.js')
 
 const User = require('../model/userModal.js')
 router.use(generatorId)
-router.post('/app/contacts', createContactsList)
+router.post('/app/contacts', checkCreateData, createContactsList)
 router.get('/app/contacts', searchContactsList)
 router.use('/app/contacts/:id', updArray)
 router.use('/app/contacts/:id', dltArray)

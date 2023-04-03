@@ -1,7 +1,7 @@
 const fs = require('fs').promises
 const { handleContactsValidator } = require('../utils/fileValidator.js')
-
-exports.createContactsList = async (req, res) => {
+const { catchAuthErr } = require('../utils')
+exports.createContactsList = catchAuthErr(async (req, res) => {
   try {
     const { error, value } = handleContactsValidator(req.body)
     console.log(error, value)
@@ -22,8 +22,8 @@ exports.createContactsList = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-}
-exports.searchContactsList = async (req, res) => {
+})
+exports.searchContactsList = catchAuthErr(async (req, res) => {
   try {
     const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
 
@@ -33,8 +33,8 @@ exports.searchContactsList = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-}
-exports.getContactById = async (req, res) => {
+})
+exports.getContactById = catchAuthErr(async (req, res) => {
   try {
     const { id } = req.params
     const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
@@ -44,8 +44,8 @@ exports.getContactById = async (req, res) => {
     const err = new ErrorMessage()
     console.log(err)
   }
-}
-exports.updContactById = async (req, res) => {
+})
+exports.updContactById = catchAuthErr(async (req, res) => {
   try {
     const { contactGrouped } = req
     res.status(200).json({ contactGrouped })
@@ -53,8 +53,8 @@ exports.updContactById = async (req, res) => {
     const err = new ErrorMessage()
     console.log(err)
   }
-}
-exports.dltContactById = async (req, res) => {
+})
+exports.dltContactById = catchAuthErr(async (req, res) => {
   try {
     const { contactsArr } = req
     if (contactsArr) return res.status(200).json({ message: 'contact deleted' })
@@ -62,4 +62,4 @@ exports.dltContactById = async (req, res) => {
     const err = new ErrorMessage()
     console.log(err)
   }
-}
+})
