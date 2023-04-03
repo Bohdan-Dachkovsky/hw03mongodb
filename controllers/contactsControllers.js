@@ -1,5 +1,4 @@
 const fs = require('fs').promises
-const { handleContactsValidator } = require('../utils/fileValidator.js')
 const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {

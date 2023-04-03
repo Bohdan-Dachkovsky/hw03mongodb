@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const PASSWORD_RULE = '^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$'
+const PASSWORD_RULE = /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/
 exports.createUserDataValidator = (data) =>
   Joi.object()
     .options({ abortEarly: false })
