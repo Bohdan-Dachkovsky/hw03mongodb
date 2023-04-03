@@ -1,4 +1,4 @@
 const { catchAuthErr } = require('./catchAuthErr.js')
-exports.module = {
+module.exports = {
   catchAuthErr,
 }
