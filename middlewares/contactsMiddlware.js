@@ -2,7 +2,6 @@ const fs = require('fs').promises
 const {catchAuthErr} = require('../utils')
 const { handleIndeIndentificatorVal } = require('../utils/fileValidator')
 const { createUserDataValidator } = require('../utils/userValidator')
-const fs = require('fs').promises
 const uuid = require('uuid').v5
 exports.generatorId = catchAuthErr(async(req, res, next) => {
   const gennId = uuid()
