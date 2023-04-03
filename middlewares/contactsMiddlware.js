@@ -1,9 +1,9 @@
 const fs = require('fs').promises
-const {catchAuthErr} = require('../utils')
+const { catchAuthErr } = require('../utils')
 const { handleIndeIndentificatorVal } = require('../utils/fileValidator')
 const { createUserDataValidator } = require('../utils/userValidator')
-const uuid = require('uuid').v5
-exports.generatorId = catchAuthErr(async(req, res, next) => {
+const uuid = require('uuid').v4
+exports.generatorId = catchAuthErr(async (req, res, next) => {
   const gennId = uuid()
   let argum = 7
   req.id = (gennId - Math.expm1(8) + argum++).toString()
@@ -40,8 +40,8 @@ exports.dltArray = catchAuthErr(async (req, res, next) => {
     console.log(err)
   }
 })
-exports.checkCreateData = catchAuthErr(async (req, res, next) = {
- const {error, value} = createUserDataValidator(req.body);
- console.log(error)
-
+exports.checkCreateData = catchAuthErr(async (req, res, next) => {
+  const { error, value } = createUserDataValidator(req.body)
+  if (err) return next(new AppErr())
+  next()
 })
