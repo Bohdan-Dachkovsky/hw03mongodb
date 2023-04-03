@@ -1,21 +1,21 @@
 const fs = require('fs').promises
 const { handleContactsValidator } = require('../utils/fileValidator.js')
 const { catchAuthErr } = require('../utils')
+const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
   try {
-    const { error, value } = handleContactsValidator(req.body)
-    console.log(error, value)
-    const { name, email, phone, id } = value
-    if (error) return new IdError(403, error.details[0].message)
-    const userNumbers = JSON.parse(await fs.readFile('./db/contacts.json'))
-    const addUser = {
-      name,
-      email,
-      phone,
-      id: id,
-    }
-    userNumbers.push(addUser)
-    await fs.writeFile('../db/contacts.json', JSON.stringify(userNumbers))
+    const addUser = await User.create(req.body)
+    // console.log(error, value)
+    // const { name, email, phone, id } = value
+    // const userNumbers = JSON.parse(await fs.readFile('./db/contacts.json'))
+    // const addUser = {
+    //   name,
+    //   email,
+    //   phone,
+    //   id: id,
+    // }
+    // userNumbers.push(addUser)
+    // await fs.writeFile('../db/contacts.json', JSON.stringify(userNumbers))
     res.status(201).json({
       contact: addUser,
     })

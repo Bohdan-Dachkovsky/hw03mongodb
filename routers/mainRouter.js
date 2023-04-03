@@ -1,5 +1,5 @@
 const express = require('express')
-const fs = require('fs').promises
+// const fs = require('fs').promises
 const router = express.Router()
 const {
   createContactsList,
@@ -15,7 +15,6 @@ const {
   checkCreateData,
 } = require('../middlewares/contactsMiddlware.js')
 
-const User = require('../model/userModal.js')
 router.use(generatorId)
 router.post('/app/contacts', checkCreateData, createContactsList)
 router.get('/app/contacts', searchContactsList)

@@ -40,6 +40,7 @@ exports.dltArray = catchAuthErr(async (req, res, next) => {
     console.log(err)
   }
 })
-exports.checkCreateData = async (req, res, next) = {
-  const { error, value } = createUserDataValidator(req.body)
-}
+exports.checkCreateData = catchAuthErr( async (req, res, next) = {
+ const { error, value } = createUserDataValidator(req.body),
+
+})
