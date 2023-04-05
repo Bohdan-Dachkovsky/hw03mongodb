@@ -2,64 +2,42 @@
 const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
-  try {
-    const addUser = await User.create(req.body)
-    // console.log(error, value)
-    // const { name, email, phone, id } = value
-    // const userNumbers = JSON.parse(await fs.readFile('./db/contacts.json'))
-    // const addUser = {
-    //   name,
-    //   email,
-    //   phone,
-    //   id: id,
-    // }
-    // userNumbers.push(addUser)
-    // await fs.writeFile('../db/contacts.json', JSON.stringify(userNumbers))
-    res.status(201).json({
-      contacts: addUser,
-    })
-  } catch (error) {
-    console.log(error)
-  }
+  const addUser = await User.create(req.body)
+  // console.log(error, value)
+  // const { name, email, phone, id } = value
+  // const userNumbers = JSON.parse(await fs.readFile('./db/contacts.json'))
+  // const addUser = {
+  //   name,
+  //   email,
+  //   phone,
+  //   id: id,
+  // }
+  // userNumbers.push(addUser)
+  // await fs.writeFile('../db/contacts.json', JSON.stringify(userNumbers))
+  res.status(201).json({
+    contacts: addUser,
+  })
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
-  try {
-    // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
-    const listContacts = await User.find()
-    res.status(201).json({
-      listContacts,
-    })
-  } catch (error) {
-    console.log(error)
-  }
+  // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
+  const listContacts = await User.find()
+  res.status(201).json({
+    listContacts,
+  })
 })
 exports.getContactById = catchAuthErr(async (req, res) => {
-  try {
-    const { id } = req.params
-    const contacts = User.findById(id)
-    // const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
-    // const contactGrouped = listContacts.filter((element) => element.id === id)
-    res.status(200).json({ contacts })
-  } catch (error) {
-    const err = new ErrorMessage()
-    console.log(err)
-  }
+  const { id } = req.params
+  const contacts = User.findById(id)
+  // const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
+  // const contactGrouped = listContacts.filter((element) => element.id === id)
+  res.status(200).json({ contacts })
 })
 exports.updContactById = catchAuthErr(async (req, res) => {
-  try {
-    // const { contactGrouped } = req
-    // res.status(200).json({ contactGrouped })
-  } catch (error) {
-    const err = new ErrorMessage()
-    console.log(err)
-  }
+  const { id } = req.params
+  const update = await User.findById(id, { name: req.body.name })
+  res.status(200).json({ contact: update })
 })
 exports.dltContactById = catchAuthErr(async (req, res) => {
-  try {
-    // const { contactsArr } = req.body
-    // if (contactsArr) return res.status(200).json({ message: 'contact deleted' })
-  } catch (error) {
-    const err = new ErrorMessage()
-    console.log(err)
-  }
+  // const { contactsArr } = req.body
+  // if (contactsArr) return res.status(200).json({ message: 'contact deleted' })
 })
