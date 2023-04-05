@@ -48,6 +48,6 @@ exports.checkCreateData = catchAuthErr(async (req, res, next) => {
 
   console.log(userExist)
   req.body = value
-  console.log(req.body)
+
   next()
 })
