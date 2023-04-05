@@ -44,10 +44,10 @@ exports.dltArray = catchAuthErr(async (req, res, next) => {
 exports.checkCreateData = catchAuthErr(async (req, res, next) => {
   const { error, value } = createUserDataValidator(req.body)
   if (error) return next(new AppErr())
-  const userExist = await User.findOne({ name: value.name })
+  // const userExist = await User.findOne({ name: value.name })
 
-  console.log(userExist)
-  req.body = value
+  // console.log(userExist)
+  // req.body = value
 
   next()
 })
