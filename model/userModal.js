@@ -13,10 +13,6 @@ const userShema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  id: {
-    type: String,
-    require: true,
-  },
 })
 const User = mongoose.model('User', userShema)
 module.exports = User

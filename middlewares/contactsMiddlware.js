@@ -11,24 +11,9 @@ exports.generatorId = catchAuthErr(async (req, res, next) => {
   next()
 })
 exports.updArray = catchAuthErr(async (req, res, next) => {
-  // const { error, value } = handleIndeIndentificatorVal(req.params)
-  // const { id } = value
-  // if (error) return new IdError(403, error.details[0].message)
-  // const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
-  // const contactGrouped = listContacts.find((element) => element.id === id)
-  // if (!contactGrouped) return res.status(404).json({ message: 'Not found' })
-  // contactGrouped = req.body
   next()
 })
 exports.dltArray = catchAuthErr(async (req, res, next) => {
-  // const { error, value } = handleIndeIndentificatorVal(req.params)
-  // const { id } = value
-  // const listContacts = JSON.parse(await fs.readFile('./db/contacts.json'))
-
-  // if (error) return new IdError(403, error.details[0].message)
-  // const contactsGrouped = listContacts.find((element) => element.id !== id)
-  // if (!contactsGrouped) return res.status(404).json({ message: 'Not found' })
-  // req.contactsArr = contactsGrouped
   next()
 })
 exports.checkCreateData = catchAuthErr(async (req, res, next) => {
