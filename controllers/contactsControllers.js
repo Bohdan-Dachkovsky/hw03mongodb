@@ -35,10 +35,12 @@ exports.searchContactsList = catchAuthErr(async (req, res) => {
 })
 exports.getContactById = catchAuthErr(async (req, res) => {
   try {
-    const { id } = req.body
-    // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
-    // const contactGrouped = listContacts.filter((element) => element.id === id)
-    res.json(contactGrouped)
+    const { id } = req.params
+    const contacts = User.findById(id)
+      // const listContacts = JSON.parse(await fs.readFile('../db/contacts.json'))
+      // const contactGrouped = listContacts.filter((element) => element.id === id)
+      .res.status(200)
+      .json(contacts)
   } catch (error) {
     const err = new ErrorMessage()
     console.log(err)

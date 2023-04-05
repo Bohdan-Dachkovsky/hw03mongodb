@@ -9,15 +9,14 @@ const logger = require('morgan')
 if ((process.env.NODE_ENV = 'development')) app.use(logger('dev'))
 
 main()
+  .then((connect) => {
+    console.log('Database connection successful')
+    // console.log(connect)
+  })
+  .catch((err) => console.log(err))
 
 async function main() {
-  await mongoose
-    .connect(process.env.MONGO_URL)
-    .then((connect) => {
-      console.log('Database connection successful')
-      // console.log(connect)
-    })
-    .catch((err) => console.log(err))
+  await mongoose.connect(process.env.MONGO_URL)
 }
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
