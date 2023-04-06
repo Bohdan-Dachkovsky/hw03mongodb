@@ -15,7 +15,7 @@ const {
   checkCreateData,
 } = require('../middlewares/contactsMiddlware.js')
 
-// router.use(generatorId)
+router.use('/app/contacts', generatorId)
 router.post('/app/contacts', checkCreateData, createContactsList)
 router.get('/app/contacts', searchContactsList)
 router.use('/app/contacts/:id', updArray)
