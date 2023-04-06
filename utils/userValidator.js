@@ -7,6 +7,6 @@ exports.createUserDataValidator = (data) =>
       name: Joi.string().max(15).required(),
       email: Joi.string().max(35).required(),
       phone: Joi.string().min(9).max(13).regex(PASSWORD_RULE).required(),
-      favorite: Joi.boolean.require(),
+      favorite: Joi.boolean,
     })
     .validate(data)
