@@ -8,9 +8,12 @@ const {
   dltContactById,
   updContactById,
 } = require('../controllers/contactsControllers.js')
-const { checkCreateData } = require('../middlewares/contactsMiddlware.js')
+const {
+  checkCreateData,
+  generatorId,
+} = require('../middlewares/contactsMiddlware.js')
 
-//router.use('/app/contacts', generatorId)
+router.use('/app/contacts:/id', generatorId)
 router.post('/app/contacts/:id', checkCreateData, createContactsList)
 router.get('/app/contacts', searchContactsList)
 // router.use('/app/contacts/:id', updArray)
