@@ -3,11 +3,11 @@ const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
   const { id } = req.params
-
+  const { name, email, phone } = req.body
   const addUser = {
-    name: 'Anders',
-    email: 'Ad@ros.ua',
-    phone: '+3809434343',
+    name,
+    email,
+    phone,
     id: id,
   }
 
@@ -16,7 +16,7 @@ exports.createContactsList = catchAuthErr(async (req, res) => {
   })
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
-  const listContacts = await User.find()
+  const listContacts = await User.find().skip(0)
   res.status(201).json({
     listContacts,
   })
@@ -29,11 +29,19 @@ exports.getContactById = catchAuthErr(async (req, res) => {
 })
 exports.updContactById = catchAuthErr(async (req, res) => {
   const { id } = req.params
-  const updContacts = await User.findById(id, { name: req.body.name })
+  const updContacts = await User.findById(
+    id,
+    { name: req.body.name, email: req.body.email, phone: req.body.phone },
+    { new: true },
+  )
   res.status(200).json({ contact: updContacts })
 })
 exports.dltContactById = catchAuthErr(async (req, res) => {
   const { id } = req.params
-  const dltContacts = await User.findOneAndDelete(id, { name: req.body.name })
+  const dltContacts = await User.findOneAndDelete(
+    id,
+    { name: req.body.name, email: req.body.email, phone: req.body.phone },
+    { new: true },
+  )
   res.status(200).json({ contact: dltContacts })
 })
