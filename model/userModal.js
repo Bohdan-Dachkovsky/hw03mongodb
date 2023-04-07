@@ -15,6 +15,7 @@ const userShema = new mongoose.Schema({
   },
   favorite: {
     type: Boolean,
+    default: false,
     require: true,
   },
 })

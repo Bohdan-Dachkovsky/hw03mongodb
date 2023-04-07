@@ -21,7 +21,9 @@ exports.generatorId = catchAuthErr(async (req, res, next) => {
 exports.checkCreateData = catchAuthErr(async (req, res, next) => {
   const { error, value } = createUserDataValidator(req.body)
   if (error) return next(new AppErr())
-
+  const UserExist = User.exists({ name: value.name })
+  if (UserExist) return new AppErr(409, 'User with this email don’t be add')
+  console.log(UserExist)
   req.body = value
 
   next()
