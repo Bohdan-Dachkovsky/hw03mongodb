@@ -14,7 +14,7 @@ exports.createContactsList = catchAuthErr(async (req, res) => {
   })
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
-  const listContacts = await User.find().skip(0)
+  const listContacts = await User.find()
   res.status(201).json({
     listContacts,
   })
