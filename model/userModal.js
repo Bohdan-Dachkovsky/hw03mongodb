@@ -13,6 +13,10 @@ const userShema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  id: {
+    type: String,
+    require: true,
+  },
   favorite: {
     type: Boolean,
     default: false,
