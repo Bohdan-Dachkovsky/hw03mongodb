@@ -1,3 +1,4 @@
+const { number } = require('joi')
 const mongoose = require('mongoose')
 
 const userShema = new mongoose.Schema({
@@ -10,7 +11,7 @@ const userShema = new mongoose.Schema({
     require: true,
   },
   phone: {
-    type: String,
+    type: Number,
     require: true,
   },
   favorite: {
