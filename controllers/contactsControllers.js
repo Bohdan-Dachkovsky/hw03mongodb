@@ -2,15 +2,7 @@
 const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
-  const { id } = req.params
-  const { name, email, phone } = req.body
-  const addUser = {
-    name,
-    email,
-    phone,
-    id: id,
-  }
-
+  const addUser = await User.create(req.body)
   res.status(201).json({
     contact: addUser,
   })
