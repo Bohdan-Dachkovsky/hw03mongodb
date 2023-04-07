@@ -2,10 +2,15 @@
 const { catchAuthErr } = require('../utils')
 const User = require('../model/userModal.js')
 exports.createContactsList = catchAuthErr(async (req, res) => {
-  const { ...data } = req.body
-  const addUser = await User.create({ ...data })
+  const { id } = req.params
+  const addUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+    id: id,
+  })
   res.status(201).json({
-    contact: addUser,
+    contacts: addUser,
   })
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
@@ -27,7 +32,7 @@ exports.updContactById = catchAuthErr(async (req, res) => {
     { name: req.body.name, email: req.body.email, phone: req.body.phone },
     { new: true },
   )
-  res.status(200).json({ contact: updContacts })
+  res.status(200).json({ contacts: updContacts })
 })
 exports.dltContactById = catchAuthErr(async (req, res) => {
   const { id } = req.params
@@ -36,5 +41,5 @@ exports.dltContactById = catchAuthErr(async (req, res) => {
     { name: req.body.name, email: req.body.email, phone: req.body.phone },
     { new: true },
   )
-  res.status(200).json({ contact: dltContacts })
+  res.status(200).json({ contacts: dltContacts })
 })
