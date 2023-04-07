@@ -12,7 +12,7 @@ exports.createContactsList = catchAuthErr(async (req, res) => {
   }
 
   res.status(201).json({
-    contacts: addUser,
+    contact: addUser,
   })
 })
 exports.searchContactsList = catchAuthErr(async (req, res) => {
