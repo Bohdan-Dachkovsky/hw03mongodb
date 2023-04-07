@@ -1,6 +1,6 @@
 const Joi = require('joi')
 const PASSWORD_RULE =
-  '/s*(?:+?(d{1,3}))?[WDs]^|()*(d[WDs]*?d[DWs]*?d)[WDs]*(d[WDs]*?d[DWs]*?d)[WDs]*(d[WDs]*?d[DWs]*?d[WDs]*?d)(?: *x(d+))?s*$/'
+  '(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[$@$!#.])[A-Za-zd$@$!%*?&.]{8,20}'
 exports.createUserDataValidator = (data) =>
   Joi.object()
     .keys({
