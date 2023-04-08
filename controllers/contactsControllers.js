@@ -22,7 +22,7 @@ exports.searchContactsList = catchAuthErr(async (req, res) => {
 })
 exports.getContactById = catchAuthErr(async (req, res) => {
   const { id } = req.params
-  const contacts = User.findById(id)
+  const contacts = await User.findById(id)
   console.log(contacts)
   res.status(200).json({ contacts })
 })
