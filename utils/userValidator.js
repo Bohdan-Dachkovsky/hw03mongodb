@@ -9,3 +9,12 @@ exports.createUserDataValidator = (data) =>
       favorite: Joi.boolean,
     })
     .validate(data)
+exports.updateContactsDataValidator = (data) =>
+  Joi.object()
+    .keys({
+      name: Joi.string().max(15),
+      email: Joi.string().max(35),
+      phone: Joi.string().min(9).max(13),
+      favorite: Joi.boolean,
+    })
+    .validate(data)

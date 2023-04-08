@@ -11,6 +11,7 @@ const {
 const {
   checkCreateData,
   generatorId,
+  UpdData,
 } = require('../middlewares/contactsMiddlware.js')
 
 router.use('/app/contacts:/id', generatorId)
@@ -19,7 +20,7 @@ router.get('/app/contacts', searchContactsList)
 // router.use('/app/contacts/:id', updArray)
 // router.use('/app/contacts/:id', dltArray)
 router.get('/app/contacts/:id', getContactById)
-router.put('app/contacts/:id', updContactById)
+router.putch('app/contacts/:id', UpdData, updContactById)
 router.delete('/app/contacts/:id', dltContactById)
 
 module.exports = router
