@@ -25,10 +25,11 @@ app.use(cookieParser())
 app.use(cors())
 app.use('/api', router)
 app.use((err, req, res, next) => {
-  const msg = Array.isArray(err.message) ? err.message.join(';;') : err.message
-  res.status(err || 500).json({
+  res.locals.error = err
+  const status = err.status || 500
+  res.status(status).json({
     message: err.message,
-    stack: err,
+    error: err,
   })
 })
 app.listen(process.env.PORT, () => {
