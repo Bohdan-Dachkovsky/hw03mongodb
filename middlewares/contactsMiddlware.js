@@ -26,7 +26,7 @@ exports.checkCreateData = catchAuthErr(async (req, res, next) => {
   console.log(error)
   if (error) return next(new AppErr())
 
-  const UserExist = User.exists({ name: value.name })
+  const UserExist = await User.exists({ name: value.name })
   if (UserExist)
     return next(new AppErr(409, 'User with this email don’t be add'))
   console.log(UserExist)
@@ -39,7 +39,7 @@ exports.UpdData = catchAuthErr(async (req, res, next) => {
   console.log(error)
   if (error) return next(new AppErr())
 
-  const UserExist = User.exists({ name: value.name })
+  const UserExist = await User.exists({ name: value.name })
   if (UserExist)
     return next(new AppErr(409, 'User with this email don’t be add'))
   console.log(UserExist)
