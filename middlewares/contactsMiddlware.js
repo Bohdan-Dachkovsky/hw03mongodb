@@ -7,7 +7,7 @@ const {
 const User = require('../model/userModal.js')
 
 // const uuid = require('uuid').v4
-exports.generatorId = catchAuthErr(async (req, res, next) => {
+exports.validateId = catchAuthErr(async (req, res, next) => {
   const { id } = req.params
   const valideId = Types.ObjectId.isValid(id)
   if (valideId) return next(new ErrorId(404, 'Contact don’t found'))

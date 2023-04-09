@@ -10,17 +10,15 @@ const {
 } = require('../controllers/contactsControllers.js')
 const {
   checkCreateData,
-  generatorId,
+  validateId,
   UpdData,
 } = require('../middlewares/contactsMiddlware.js')
 
-router.use('/app/contacts:/id', generatorId)
-router.route('/app/contacts').post(checkCreateData, createContactsList)
-router.get('/app/contacts', searchContactsList)
-// router.use('/app/contacts/:id', updArray)
-// router.use('/app/contacts/:id', dltArray)
-router.get('/app/contacts/:id', getContactById)
-router.put('app/contacts/:id', UpdData, updContactById)
-router.delete('/app/contacts/:id', dltContactById)
+router.use('/contacts:/id', validateId)
+router.post('/contacts/', checkCreateData, createContactsList)
+router.get('/contacts/', searchContactsList)
+router.get('/contacts/:id', getContactById)
+router.put('/contacts/:id', UpdData, updContactById)
+router.delete('/contacts/:id', dltContactById)
 
 module.exports = router
