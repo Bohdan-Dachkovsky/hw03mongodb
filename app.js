@@ -27,7 +27,7 @@ app.use('/api', router)
 app.use((err, req, res, next) => {
   const msg = Array.isArray(err.message) ? err.message.join(';;') : err.message
   res.status(err || 500).json({
-    message: msg,
+    message: err.message,
     stack: err,
   })
 })
