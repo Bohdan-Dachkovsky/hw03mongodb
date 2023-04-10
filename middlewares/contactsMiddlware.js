@@ -50,7 +50,7 @@ exports.UpdData = catchAuthErr(async (req, res, next) => {
 exports.getContactStatus = catchAuthErr(async (req, res) => {
   const { id } = req.params
   const contacts = await User.findById(id).select(
-    '-_id,-name,-email,-phone,-__v',
+    '-_id -name -email -phone -__v',
   )
   console.log(contacts)
   res.status(200).json({ contacts })
