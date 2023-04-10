@@ -17,6 +17,7 @@ main()
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
+    dbName: 'db-contacts',
     ssl: true,
     sslValidate: false,
   })
