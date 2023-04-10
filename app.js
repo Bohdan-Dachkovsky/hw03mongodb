@@ -16,7 +16,11 @@ main()
   .catch((err) => console.log(err))
 
 async function main() {
-  await mongoose.connect(process.env.MONGO_URL)
+  await mongoose.connect(process.env.MONGO_URL, {
+    ssl: true,
+    sslValidate: false,
+    useUni,
+  })
 }
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))

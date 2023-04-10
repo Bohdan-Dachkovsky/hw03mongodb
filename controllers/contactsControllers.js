@@ -8,7 +8,7 @@ exports.createContactsList = catchAuthErr(async (req, res) => {
     phone: req.body.phone,
   })
   console.log(addContact)
-  res.status(201).json({
+  res.status(202).json({
     contacts: addContact,
   })
 })
