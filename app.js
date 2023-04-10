@@ -12,7 +12,6 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    dbName: 'db-contacts',
     ssl: true,
     sslValidate: false,
     keepAlive: true,
