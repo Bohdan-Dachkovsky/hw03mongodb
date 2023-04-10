@@ -19,7 +19,7 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
     ssl: true,
     sslValidate: false,
-    useUni,
+    dbName: 'db-contacts',
   })
 }
 app.use(cookieParser())
