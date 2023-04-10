@@ -40,6 +40,9 @@ app.use((err, req, res, next) => {
     error: err,
   })
 })
+mongoose.connection.once('open', () => {
+  console.log('Connected to db!')
+})
 app.listen(process.env.PORT, () => {
   console.log('Server listening on port 3000!')
 })
