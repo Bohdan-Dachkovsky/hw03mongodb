@@ -6,12 +6,17 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const router = require('./routers/mainRouter.js')
 const logger = require('morgan')
+app.use(cookieParser())
+app.use(cors())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 if ((process.env.NODE_ENV = 'development')) app.use(logger('dev'))
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+
     keepAlive: true,
     keepAliveInitialDelay: 300000,
     serverSelectionTimeoutMS: 5000,
@@ -24,11 +29,6 @@ main()
   })
   .catch((err) => console.log(err))
 
-app.use(cookieParser())
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors())
 app.use('/api', router)
 app.use((err, req, res, next) => {
   res.locals.error = err
