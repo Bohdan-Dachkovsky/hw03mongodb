@@ -27,7 +27,6 @@ main()
   })
   .catch((err) => console.log(err))
 
-mongoose.connection.once('open')
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
