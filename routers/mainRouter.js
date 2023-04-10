@@ -12,9 +12,11 @@ const {
   checkCreateData,
   validateId,
   UpdData,
+  getContactStatus,
 } = require('../middlewares/contactsMiddlware.js')
 
 router.use('/contacts:/id', validateId)
+router.use('/contacts/favorite/:id', getContactStatus)
 router.post('/contacts/', checkCreateData, createContactsList)
 router.get('/contacts/', searchContactsList)
 router.get('/contacts/:id', getContactById)
