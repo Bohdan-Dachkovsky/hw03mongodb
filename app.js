@@ -16,10 +16,6 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-
-    keepAlive: true,
-    keepAliveInitialDelay: 300000,
-    serverSelectionTimeoutMS: 5000,
   })
 }
 main()
