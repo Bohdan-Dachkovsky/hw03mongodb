@@ -14,8 +14,13 @@ if ((process.env.NODE_ENV = 'development')) app.use(logger('dev'))
 
 async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
+    ssl: true,
+    sslValidate: true,
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    keepAlive: true,
+    keepAliveInitialDelay: 300000,
+    serverSelectionTimeoutMS: 5000,
   })
 }
 main()
