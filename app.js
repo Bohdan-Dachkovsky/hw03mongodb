@@ -27,6 +27,7 @@ async function main() {
     serverSelectionTimeoutMS: 5000,
   })
 }
+mangoose.connection.once('open')
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
