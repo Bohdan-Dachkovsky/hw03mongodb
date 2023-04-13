@@ -1,7 +1,7 @@
 {
   "name": "hw03mongodb",
   "version": "1.0.0",
-  "description": "Mongodb, collaction database",
+  "description": "Mongodb, collection database",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
