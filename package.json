@@ -1,0 +1,35 @@
+{
+  "name": "hw04-auth",
+  "version": "1.0.0",
+  "description": "Mongodb, collection database, authorization",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bohdan-Dachkovsky/hw03mongodb.git"
+  },
+  "author": "Bohdan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bohdan-Dachkovsky/hw03mongodb/issues"
+  },
+  "homepage": "https://github.com/Bohdan-Dachkovsky/hw03mongodb#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22",
+    "npm": "^8.19.4"
+  }
+}
