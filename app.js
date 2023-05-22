@@ -33,6 +33,6 @@ app.post('/avatars', upload.single('foto'), (res, req) => {
 console.log(req.file)
 }) 
 app.listen(process.env.PORT, () => {
-console.log('Uploading file in multer!')
+console.log('File is running with multer')
 })
 module.exports = app
