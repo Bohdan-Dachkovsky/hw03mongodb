@@ -2,17 +2,17 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs/promises')
 const app = express()
-const nanoid = require('nanoid')
+const { nanoid } = require('nanoid')
 const multer = require('multer')
 require('dotenv').config({ path: './.env' })
 app.use(express.urlencoded({ extended: false }))
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const nanoId = nanoid()
+
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(express.static('public'))
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ message: err.message, status: err.status });
@@ -48,7 +48,7 @@ app.post('/avatars', upload.single('photo'), async(res, req) => {
   }
   const newPath = path.join('public', 'avatars', originalName)
   const newPhoto = {
-  id: nanoId(),
+  id: nanoid(),
   ...req.body,
   newPath
   }
