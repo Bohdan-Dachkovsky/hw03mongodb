@@ -37,7 +37,7 @@ const files = []
 app.get('/avatars', (req, res) => {
 res.json(files)
 }) 
-const photoDir = path(__dirname, "public", "avatars")
+const photoDir = path.join(__dirname, "public", "avatars")
 app.post('/avatars', upload.single('photo'), async(res, req) => {
   const {path: tempUpload, originalName} = req.file
   const resultUpload = path.join(photoDir, originalName)
