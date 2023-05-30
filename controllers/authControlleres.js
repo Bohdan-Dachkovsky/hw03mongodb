@@ -1,5 +1,7 @@
 require('dotenv').config({ path: '../.env' })
+const {BASE_URL} = process.env
 const { catchAuthErr } = require('../utils')
+const {sendEmail} = require('../app.js')
 const path = ('path')
 const fs = require('fs/promises')
 const nanoid = require('nanoid')
@@ -14,19 +16,34 @@ const signRFC = (id) =>
 exports.createUsersList = catchAuthErr(async (req, res) => {
   const { name, email, password } = req.body
   const avatarURL = gravatar.url(email)
-
+  const verificationCode = nanoid()
   const addUsers = await User.create({
     name,
     email,
     password,
     avatarURL,
+    verificationCode,
   })
-  
+  const verifyEmail = {
+    to: email,
+    subject: 'Test email',
+    html: `<a target ="_blank" href ='${BASE_URL}/users/verify/${verificationCode}'><b>Click for verify email adress</b></a>`
+    }
+    await sendEmail(verifyEmail)
   const token = signRFC(addUsers.id)
   console.log(addUsers)
   res.type('application/json').status(201).json({ addUsers, token })
 })
+exports.verifyEmail = catchAuthErr(async (req, res, next) => {
+const {verificationCode} = req.params
+const user = await User.findOne({verificationCode})
+if (!user) return next(new Error(401), 'Email doesn’ exist')
+await User.findByIdAndUpdate(user.id, {verify: true, verificationCode:''});
 
+res.status(201).json({
+message: 'Email verify sucssesfuly'
+})
+})
 exports.getUsersLog = catchAuthErr(async (req, res, next) => {
   const { email, password } = req.body
   const logUser = await User.findOne({ email, password })
@@ -37,7 +54,7 @@ exports.getUsersLog = catchAuthErr(async (req, res, next) => {
   )
   if (!passwordIsValid) return next(new Error(401), 'Don`t authorized')
   logUser.password = undefined
-
+  if (!logUser.verify) return next(new Error(401), 'Error and password isn’t valid')
   const token = signRFC(logUser.id)
   res.type('application/json').status(200).json({
     token,
@@ -73,6 +90,7 @@ exports.sendFile = catchAuthErr(async(res, req) => {
     ...req.body,
     newPath
     }
+  
     files.push(newPhoto)
     res.status(201).json(newPhoto)
   

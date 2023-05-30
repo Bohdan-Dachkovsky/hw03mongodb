@@ -47,14 +47,15 @@ pass: META_PASSWORD
 }
 }
 const transport = nodemailer.createTransport(nodemailerConfig)
-const email = {
-to: 'lijamom269@peogi.com',
-from: 'bohdanukr@meta.ua',
-subject: 'Test email',
-html: '<p><b>Email</b> from Localhost:3000</p>'
 
+const sendEmail = async (data) => {
+  const email = {
+    ...data,
+    from: 'bohdanukr@meta.ua',
+    }
+    transport.sendMail(email).then(() => {console.log('Email came')}).catch((err) => {console.log(err.message)})
 }
-transport.sendMail(email).then(() => {console.log('Email came')}).catch((err) => {console.log(err.message)})
+module.exports = sendEmail
 
 mongoose.connection.once('open', () => {
   console.log('Connected to db!')
