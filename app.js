@@ -51,7 +51,7 @@ const email = {
 to: 'lijamom269@peogi.com',
 from: 'bohdanukr@meta.ua',
 subject: 'Test email',
-html: '<p>Test email</p>'
+html: '<p><b>Email</b> from Localhost:3000</p>'
 
 }
 transport.sendMail(email).then(() => {console.log('Email came')}).catch((err) => {console.log(err.message)})
