@@ -1,9 +1,11 @@
 const path = require('path')
 const multer = require('multer')
-const uploadDir = path.join(__dirname, 'temp')
+
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+      const uploadDir = path.join(__dirname, 'temp')
+      console.log(uploadDir)
         cb(null, uploadDir)
       },
       filename: (req, file, cb) => {

@@ -6,7 +6,7 @@ const nanoid = require('nanoid')
 const jwt = require('jsonwebtoken')
 const gravatar = require('gravatar')
 const User = require('../model/userModal.js')
-
+const files = []
 const signRFC = (id) =>
   jwt.sign({ id }, process.env.JWT_Secret, {
     expiresIn: '7d',
@@ -47,21 +47,23 @@ exports.getUsersLog = catchAuthErr(async (req, res, next) => {
     },
   })
 })
-const avatarDir = path.join(__dirname, '../', 'public', 'avatars')
+
 exports.updateAvatars = catchAuthErr(async (req, res) => {
   const {id} = req.user
   const {path: tempUpload, originalName} = req.file
+  const avatarDir = path.join(__dirname, '../', 'public', 'avatars')
   const resultUpload = path.join(avatarDir, originalName)
     await fs.rename(tempUpload, resultUpload)
     const avatarURL = path.join('avatars', originalName)
     await User.findByIdAndUpdate(id, avatarURL)
 })
-const photoDir = path.join(__dirname, "public", "avatars")
 
-const files = []
+
 exports.sendFile = catchAuthErr(async(res, req) => {
     const {path: tempUpload, originalName} = req.file
+    const photoDir = path.join(__dirname, "public", "avatars")
     const resultUpload = path.join(photoDir, originalName)
+  
     try {
       await fs.rename(tempUpload, resultUpload)
     } catch(error) {
