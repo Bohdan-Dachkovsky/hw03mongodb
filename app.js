@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-
+const nodemailer = require('nodemailer')
 require('dotenv').config({ path: './.env' })
 app.use(express.urlencoded({ extended: false }))
 const cookieParser = require('cookie-parser')
@@ -13,6 +13,7 @@ app.use(cookieParser())
 app.use(express.static('public'))
 app.use( '/', router)
 const logger = require('morgan')
+const {META_PASSWORD} = process.env
 if ((process.env.NODE_ENV = 'development')) app.use(logger('common'))
 async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
@@ -36,7 +37,24 @@ app.use((err, req, res, next) => {
   res.json({ message: err.message, status: err.status });
 });
 
+const nodemailerConfig = {
+host: 'smtp.meta.ua',
+port: 465,
+secure: true,
+auth: {
+user: 'bohdanukr.meta@ua',
+pass: META_PASSWORD
+}
+}
+const transport = nodemailer.createTransport(nodemailerConfig)
+const email = {
+to: 'lijamom269@peogi.com',
+from: 'bohdanukr@meta.ua',
+subject: 'Test email',
+html: '<p>Test email</p>'
 
+}
+transport.sendMail(email).then(() => {console.log('Email came')}).catch((err) => {console.log(err.message)})
 
 mongoose.connection.once('open', () => {
   console.log('Connected to db!')
