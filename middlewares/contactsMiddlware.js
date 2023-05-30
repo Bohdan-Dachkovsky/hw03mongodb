@@ -1,4 +1,5 @@
 require('dotenv').config({ path: '../.env' })
+const {sendEmail} = require('../app.js')
 const { Types } = require('mongoose')
 const { catchAuthErr } = require('../utils')
 const {
@@ -103,3 +104,15 @@ exports.allowFor = (...role) => async (req, res, next) => {
   if (role.includes(favorite)) return next()
   next(new Error(403, 'You`re forbidden, see next recources'))
 }
+exports.resendEmail = catchAuthErr(async (req, res, next) => {
+  const {email} = req.body
+  const user = await User.findOne({email})
+  if (user.verify) return next(new Error(401, "Verification has been passed"))
+  if (!user) return next(new Error(401, "Missing required field email"))
+  const verifyEmail = {
+    to: email,
+    subject: 'Test email',
+    html:`<a target ="_blank" href ='${process.env.BASE_URL}/users/verify/${user.verificationCode}'><b>Click for verify email adress</b></a>`,
+}
+await sendEmail(verifyEmail)
+})

@@ -16,3 +16,9 @@ exports.updateContactsDataValidator = (data) =>
       favorite: Joi.boolean.require(),
     })
     .validate(data)
+exports.verifyEmail = (data) =>
+    Joi.object()
+      .keys({
+        email: Joi.string().max(35).required(),
+      })
+      .validate(data)

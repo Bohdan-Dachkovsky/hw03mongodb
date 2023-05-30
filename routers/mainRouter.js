@@ -3,6 +3,7 @@ const {upload} = require('../middlewares/upload.js')
 const router = express.Router()
 const {
   createUsersList,
+  verifyEmail,
   getUsersLog,
   updateAvatars,
   sendFile,
@@ -23,6 +24,7 @@ const {
   validateToken,
   allowFor,
   validateId,
+  resendEmail
 } = require('../middlewares/contactsMiddlware.js')
 const { userRole } = require('../variables/constant.js') 
 router.use('/contacts:/id', validateId)
@@ -30,6 +32,7 @@ router.all('*', validateToken, allowFor(userRole.MASTER))
 router.get('/contacts/:id/favorite', getContactStatus)
 router.post('/users/register', UpdDataValidator, dataConflict, createUsersList)
 router.get('/users/verify/:verificationCode', verifyEmail)
+router.post('/verify', resendEmail)
 router.get('/users/login', checkCreateLogin, getUsersLog)
 router.get('/users/logout', getOffUsers)
 router.get('/contacts?page=1&limit=20', searchContactsList)
