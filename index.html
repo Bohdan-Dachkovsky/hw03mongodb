@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site create with photographs"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script ></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js" integrity="sha512-RjvSEaeDqPCfUVQ9kna2/2OqHz/7F04IOl1/66LmQjB/lOeAzwq7LrbTzDbz5cJzlPNJ5qteNtHR56XaJSTNWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+     const productContainer = document.getElementById('photo');
+     const baseURL = 'https://localhost:3001';
+     const productRequest = axios.get(`${baseURL}/avatars`);
+     productRequest.then(({data}) => {
+
+    const blockContainer = data.map(element => `
+    <div>
+    <h4>${element.author}</h4>
+    <img src="${baseURL/element.photo}" />
+    </div>
+    `).join()
+   productContainer.insertAdjacentElement('afterend', blockContainer)
+    }).catch((error) => {console.error()})
+    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="photo"></div>
+  </body>
+</html>
