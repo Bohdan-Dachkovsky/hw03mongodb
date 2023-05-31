@@ -38,9 +38,9 @@ app.use((err, req, res, next) => {
 
 
 const db = mongoose.connection;
-db.once('open', { useUnifiedTopology: true },() => {
+db.once('open', () => {
   console.log('Connected to db!')
-  app.listen(process.env.PORT, function() { 
+  app.listen(process.env.PORT, function () { 
     console.log('Server listening on port 3001!')
   })
 })
