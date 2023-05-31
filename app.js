@@ -18,6 +18,7 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL, {
     ssl: true,
     sslValidate: true,
+    useMongoClient: true,
     useUnifiedTopology: true,
     useNewUrlParser: true,
     keepAlive: true,
