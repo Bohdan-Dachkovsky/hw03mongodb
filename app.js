@@ -37,10 +37,10 @@ app.use((err, req, res, next) => {
 });
 
 
-
-mongoose.connection.once('open', () => {
+const db = mongoose.connection;
+db.once('open', () => {
   console.log('Connected to db!')
-  app.listen(process.env.PORT, () => {
+  app.listen(process.env.PORT, function() { 
     console.log('Server listening on port 3001!')
   })
 })

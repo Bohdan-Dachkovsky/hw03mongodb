@@ -33,19 +33,26 @@ body: formElement,
     </script>
     <script  src="https://cdn.jsdelivr.net/npm/axios@1.14.0/dist/axios.min.js" integrity="sha512-RjvSEaeDqPCfUVQ9kna2/2OqHz/7F04IOl1/66LmQjB/lOeAzwq7LrbTzDbz5cJzlPNJ5qteNtHR56XaJSTNWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-     const productContainer = document.getElementById('photo');
+    
      const baseURL = 'https://localhost:5000';
      const productRequest = axios.get(`${baseURL}/avatars`);
      productRequest.then(({data}) => {
-
+   
     const blockContainer = data.map(element => `
     <div>
     <h4>${element.author}</h4>
     <img src="${baseURL/element.photo}" />
     </div>
     `).join()
+
+    const productContainer = document.getElementById('photo');
    productContainer.insertAdjacentElement('afterend', blockContainer)
     }).catch((error) => {console.error()})
+    const selectElement = document.getElementById("photo");
+
+if (selectElement.selectedIndex === 0) {
+  alert("Selecciona una opción");
+}
     </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="photo"></div>
