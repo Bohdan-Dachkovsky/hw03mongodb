@@ -23,7 +23,7 @@ form.addEventListener('submit', (e) => {
 e.preventDefault()
 const formElement = new FormData()
 formElement.append('image', this.elements.myfile.files)
-const url = 'https://localhost:3001/avatars'
+const url = 'http://localhost:5000/avatars'
 fetch(url, {
 method: 'post',
 body: formElement,
@@ -34,7 +34,7 @@ body: formElement,
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js" integrity="sha512-RjvSEaeDqPCfUVQ9kna2/2OqHz/7F04IOl1/66LmQjB/lOeAzwq7LrbTzDbz5cJzlPNJ5qteNtHR56XaJSTNWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
      const productContainer = document.getElementById('photo');
-     const baseURL = 'https://localhost:3001';
+     const baseURL = 'https://localhost:5000';
      const productRequest = axios.get(`${baseURL}/avatars`);
      productRequest.then(({data}) => {
 
