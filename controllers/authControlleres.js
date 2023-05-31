@@ -60,12 +60,13 @@ exports.updateAvatars = catchAuthErr(async (req, res) => {
 
 
 exports.sendFile = catchAuthErr(async(res, req) => {
-    const {path: tempUpload, originalName} = req.file
-    const photoDir = path.join(__dirname, "public", "avatars")
-    const result = path.join(photoDir, originalName)
+    const {originalName} = req.file
+    const tempUpload = path.join(__dirname, "../", "temp", originalName)
+    const photoDir = path.join(__dirname, "../", "public", "avatars", originalName)
+    
   
     try {
-      await fs.rename(tempUpload, result)
+      await fs.rename(tempUpload, photoDir)
     } catch(error) {
     fs.unlink(tempUpload)
     }
