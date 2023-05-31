@@ -34,7 +34,7 @@ router.get('/users/logout', getOffUsers)
 router.get('/contacts?page=1&limit=20', searchContactsList)
 router.get('/users/current', getSearchedUser)
 router.put('/:id', updateContact)
-router.put('/avatars',  upload.single('avatars'), updateAvatars)
+router.put('/:id/avatars',  upload.single('photo'), updateAvatars)
 router.get('/avatars', downloadFile) 
 router.post('/avatars', upload.single('photo'), sendFile) 
 module.exports = router
