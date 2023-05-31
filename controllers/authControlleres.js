@@ -1,8 +1,8 @@
 require('dotenv').config({ path: '../.env' })
+const nanoid = require('nanoid')
 const { catchAuthErr } = require('../utils')
 const path = ('path')
 const fs = require('fs/promises')
-const nanoid = require('nanoid')
 const jwt = require('jsonwebtoken')
 const gravatar = require('gravatar')
 const User = require('../model/userModal.js')
@@ -59,18 +59,13 @@ exports.updateAvatars = catchAuthErr(async (req, res) => {
 })
 
 
-exports.sendFile = catchAuthErr(async(res, req) => {
-    const {originalName} = req.file
-    const tempUpload = path.join(__dirname, "../", "temp", originalName)
-    const photoDir = path.join(__dirname, "../", "public", "avatars", originalName)
-    
-  
+exports.sendFile = catchAuthErr(async(res, req) => {  
     try {
+      const {originalName} = req.file
+      const tempUpload = path.join(__dirname, "../", "temp", originalName)
+      const photoDir = path.join(__dirname, "../", "public", "avatars", originalName)
       await fs.rename(tempUpload, photoDir)
-    } catch(error) {
-    fs.unlink(tempUpload)
-    }
-    const newPath = path.join('avatars', originalName)
+      const newPath = path.join('avatars', originalName)
     const newPhoto = {
     id: nanoid(),
     ...req.body,
@@ -79,6 +74,11 @@ exports.sendFile = catchAuthErr(async(res, req) => {
     files.push(newPhoto)
     res.status(201).json(newPhoto)
   
+    } catch(error) {
+    const {originalName} = req.file
+    const tempUpload = path.join(__dirname, "../", "temp", originalName)
+    fs.unlink(tempUpload)
+    }
   }
   )
 exports.downloadFile = async (req,res) => {
