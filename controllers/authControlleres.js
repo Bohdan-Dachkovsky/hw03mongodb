@@ -1,5 +1,5 @@
 require('dotenv').config({ path: '../.env' })
-const nanoid = require('nanoid')
+const { v4: uuidv4 } = require('uuid');
 const { catchAuthErr } = require('../utils')
 const path = ('path')
 const fs = require('fs/promises')
@@ -67,7 +67,7 @@ exports.sendFile = catchAuthErr(async(res, req) => {
       await fs.rename(tempUpload, photoDir)
       const newPath = path.join('avatars', originalName)
     const newPhoto = {
-    id: nanoid(),
+    id: uuidv4(),
     ...req.body,
     newPath
     }
@@ -88,3 +88,4 @@ res.status(201).json(files)
   res.status(501).json(err.message)
 }
 }
+
