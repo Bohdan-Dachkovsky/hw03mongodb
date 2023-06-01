@@ -81,7 +81,7 @@ exports.getContactStatus = catchAuthErr(async (req, res) => {
   const { id } = req.params
   const contacts = await User.findById(id).select('-_id -email -password -__v')
   console.log(contacts)
-  res.type().status(200).json({ contacts })
+  res.type('application/json').status(200).json({ contacts })
 })
 
 exports.validateToken = catchAuthErr(async (req, res, next) => {
