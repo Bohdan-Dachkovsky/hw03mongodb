@@ -1,0 +1,8 @@
+logs
+node_modules
+npm-debug
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
